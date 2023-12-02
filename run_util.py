@@ -1,3 +1,5 @@
+# Copied from https://github.com/michaelerne/adventofcode-2023
+
 import time
 
 from aocd import get_data, submit

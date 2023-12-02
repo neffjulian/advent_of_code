@@ -1,8 +1,6 @@
+# Copied from https://github.com/michaelerne/adventofcode-2023
+
 from run_util import run_puzzle
-
-import regex as re
-
-NUMBERS = ['zero', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine']
 
 
 def part_a(data):
