@@ -11,9 +11,11 @@ class Hand:
         self.bid = bid
         self.score = get_type(cards, part_b) * 14 ** 5 + get_score(cards, part_b)
 
+
 def get_score(cards: str, part_b: bool) -> int:
     card_map = map_j if part_b else map_normal
     return sum(card_map[card] * 14 ** (4 - i) for i, card in enumerate(cards))
+
 
 def get_type(cards: str, part_b: bool) -> int:
     values = list(Counter(cards).values())
@@ -50,6 +52,7 @@ def get_type(cards: str, part_b: bool) -> int:
             return 1
     
     return 0
+
 
 def parse_input(data: str) -> list[tuple[str, int]]:
     return [(line.split()[0], int(line.split()[1])) for line in data.splitlines()]
