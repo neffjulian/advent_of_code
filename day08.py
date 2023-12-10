@@ -1,4 +1,3 @@
-# Copied from https://github.com/michaelerne/adventofcode-2023
 import math
 from run_util import run_puzzle
 

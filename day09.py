@@ -1,5 +1,3 @@
-# Copied from https://github.com/michaelerne/adventofcode-2023
-
 from run_util import run_puzzle
 
 def get_input(data: str) -> list[int]:
