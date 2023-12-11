@@ -1,6 +1,7 @@
 from run_util import run_puzzle
 
-def read_input(data):
+
+def solve(data: str, dist: int) -> int:
     lines = data.splitlines()
 
     galaxies = [(i, j) for i, line in enumerate(lines) for j, c in enumerate(line) if c == '#']
@@ -9,29 +10,21 @@ def read_input(data):
 
     empty_cols = [i for i in range(len(lines[0])) if all(line[i] == '.' for line in lines)]
 
-    return galaxies, empty_rows, empty_cols
+    new_galaxies = []
+    for galaxy in galaxies:
+        new_i = galaxy[0] + sum(dist for row in empty_rows if row < galaxy[0])
+        new_j = galaxy[1] + sum(dist for col in empty_cols if col < galaxy[1])
+        new_galaxies.append((new_i, new_j))
+
+    return sum(abs(g1[0] - g2[0]) + abs(g1[1] - g2[1]) for idx, g1 in enumerate(new_galaxies) for g2 in new_galaxies[idx + 1:])
 
 
 def part_a(data):
-    galaxies, empty_rows, empty_cols = read_input(data)
-
-    new_galaxies = [
-        (galaxy[0] + sum(1 for row in empty_rows if row < galaxy[0]), galaxy[1] + sum(1 for col in empty_cols if col < galaxy[1]))
-        for galaxy in galaxies
-    ]
-
-    return sum(abs(g1[0] - g2[0]) + abs(g1[1] - g2[1]) for idx, g1 in enumerate(new_galaxies) for g2 in new_galaxies[idx + 1:])
+    return solve(data, 1)
 
 
 def part_b(data):
-    galaxies, empty_rows, empty_cols = read_input(data)
-
-    new_galaxies = [
-        (galaxy[0] + sum(999999 for row in empty_rows if row < galaxy[0]), galaxy[1] + sum(999999 for col in empty_cols if col < galaxy[1]))
-        for galaxy in galaxies
-    ]
-
-    return sum(abs(g1[0] - g2[0]) + abs(g1[1] - g2[1]) for idx, g1 in enumerate(new_galaxies) for g2 in new_galaxies[idx + 1:])
+    return solve(data, 999999)
 
 def main():
     examples = [
