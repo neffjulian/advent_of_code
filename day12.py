@@ -7,9 +7,12 @@ def count(spring: str, pattern: str, pos: int, deffect: int, curr_pat: int) -> i
         return 0 if len(pattern) > curr_pat else 1
 
     if spring[pos] == '#':
-        return count(spring, pattern, pos + 1, deffect + 1, curr_pat)
+        if len(pattern) > curr_pat and pattern[curr_pat] < deffect:
+            return 0
+        else:
+            return count(spring, pattern, pos + 1, deffect + 1, curr_pat)
 
-    if spring[pos] == '.' or curr_pat == len(pattern): 
+    if spring[pos] == '.' or curr_pat == len(pattern):
         if curr_pat < len(pattern) and deffect == pattern[curr_pat]:
             return count(spring, pattern, pos + 1, 0, curr_pat + 1)
         elif deffect == 0:
@@ -40,6 +43,8 @@ def solve(data: str, part_a: bool):
 
 
 def part_a(data):
+    # print(solve(data, True))
+    # raise Exception()
     return solve(data, True)
 
 
