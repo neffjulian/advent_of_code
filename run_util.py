@@ -1,13 +1,12 @@
-# Copied from https://github.com/michaelerne/adventofcode-2023
-
 import time
 
 from aocd import get_data, submit
 
+
 def _run_part(day, description, fn, data):
-    start = time.process_time_ns()
+    start = time.perf_counter_ns()
     result = fn(data)
-    end = time.process_time_ns()
+    end = time.perf_counter_ns()
     print(f"day {day} - {description} -> result [{result}], duration {(end - start) / 1E6} ms")
     return result
 
@@ -16,7 +15,8 @@ def run_puzzle(day, part_a, part_b, examples):
     day = int(day)
     data = get_data(day=day)
 
-    start = time.process_time_ns()
+    start = time.perf_counter_ns()
+
 
     if part_a is not None:
         for example_data, example_solution_a, _ in examples:
@@ -36,5 +36,5 @@ def run_puzzle(day, part_a, part_b, examples):
         answer_b = _run_part(day, 'puzzle part_b', part_b, data)
         submit(answer=answer_b, day=day, part="b")
 
-    end = time.process_time_ns()
+    end = time.perf_counter_ns()
     print(f'total duration: {(end - start) / 1E6} ms')
