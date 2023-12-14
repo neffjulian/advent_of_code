@@ -36,6 +36,12 @@ def tilt(grid: np.ndarray) -> np.ndarray:
 
     return grid
 
+def iterate(grid: np.ndarray, nr_iterations: int) -> np.ndarray:
+    for _ in range(4 * nr_iterations):
+        grid = tilt(grid)
+        grid = np.rot90(grid, k=-1)
+    return grid
+
 
 def part_a(data):
     grid = read_input(data)
@@ -53,17 +59,11 @@ def part_b(data):
 
         if grid_tuple in grid_history:
             remaining_iterations = (iterations - i) % (i - grid_history[grid_tuple])
-
-            for _ in range(4 * remaining_iterations):
-                grid = tilt(grid)
-                grid = np.rot90(grid, k=-1)
+            grid = iterate(grid, remaining_iterations)
             break
 
         grid_history[grid_tuple] = i
-
-        for _ in range(4):
-            grid = tilt(grid)
-            grid = np.rot90(grid, k=-1)
+        grid = iterate(grid, 1)
 
     return calculate_weight(grid)
 
