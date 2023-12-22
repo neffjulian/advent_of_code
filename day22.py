@@ -1,14 +1,17 @@
 from collections import defaultdict
 from run_util import run_puzzle
 
+
 def parse_bricks(data):
     lines = [tuple(list(map(int, p.split(','))) for p in line.split('~')) for line in data.splitlines()]
     lines.sort(key=lambda x: x[0][2])  # Sort by z value
     return lines
 
+
 def update_brick(brick, max_height):
     brick[1][2] -= brick[0][2] - max_height
     brick[0][2] -= brick[0][2] - max_height
+
 
 def process_bricks(bricks, part_a=False):
     nr_bricks = len(bricks)
